@@ -10,39 +10,46 @@ def start_bot(message):
     # Создаем клавиатуру
     keyboard = types.InlineKeyboardMarkup()
     
-    # Добавляем кнопки
-    key_option1 = types.InlineKeyboardButton(text='Физика', callback_data='physics')
-    key_option2 = types.InlineKeyboardButton(text='Информатика', callback_data='informatics')
-    key_option3 = types.InlineKeyboardButton(text='Математика', callback_data='mathematics')
-    key_option4 = types.InlineKeyboardButton(text='Биология, химия', callback_data='biology')
-    key_option5 = types.InlineKeyboardButton(text='Английский язык', callback_data='english')
-    key_option6 = types.InlineKeyboardButton(text='Русский язык, литература', callback_data='russian')
-    key_option7 = types.InlineKeyboardButton(text='История, обществознание, право', callback_data='history')
-    key_option8 = types.InlineKeyboardButton(text='Художественное творчество', callback_data='art')
+    key_option = types.InlineKeyboardButton(text='Выбрать категории', callback_data='starter')
     
-    keyboard.add(key_option1)
-    keyboard.add(key_option2)
-    keyboard.add(key_option3)
-    keyboard.add(key_option4)
-    keyboard.add(key_option5)
-    keyboard.add(key_option6)
-    keyboard.add(key_option7)
-    keyboard.add(key_option8)
+    keyboard.add(key_option)
     
-    # Отправляем сообщение с клавиатурой
-    bot.send_message(message.chat.id, text="Выберите одно из направлений:", reply_markup=keyboard)
+    bot.send_message(message.chat.id, text="Для начала работы нажмите на кнопку", reply_markup=keyboard)
 
 @bot.callback_query_handler(func=lambda call: True)
 def callback_worker(call):
-    if call.data == "physics":
+    if call.data == "starter":
+        keyboard = types.InlineKeyboardMarkup()
+        key_option1 = types.InlineKeyboardButton(text='Физика', callback_data='physics')
+        key_option2 = types.InlineKeyboardButton(text='Информатика', callback_data='informatics')
+        key_option3 = types.InlineKeyboardButton(text='Математика', callback_data='mathematics')
+        key_option4 = types.InlineKeyboardButton(text='Биология, химия', callback_data='biology')
+        key_option5 = types.InlineKeyboardButton(text='Английский язык', callback_data='english')
+        key_option6 = types.InlineKeyboardButton(text='Русский язык, литература', callback_data='russian')
+        key_option7 = types.InlineKeyboardButton(text='История, обществознание, право', callback_data='history')
+        key_option8 = types.InlineKeyboardButton(text='Художественное творчество', callback_data='art')
+        
+        keyboard.add(key_option1)
+        keyboard.add(key_option2)
+        keyboard.add(key_option3)
+        keyboard.add(key_option4)
+        keyboard.add(key_option5)
+        keyboard.add(key_option6)
+        keyboard.add(key_option7)
+        keyboard.add(key_option8)
+        
+        bot.send_message(call.message.chat.id, text="Выберите одно из направлений:", reply_markup=keyboard)
+    elif call.data == "physics":
         keyboard = types.InlineKeyboardMarkup()
         sub_key1 = types.InlineKeyboardButton(text='Олимпиады', callback_data='olympiads_phisics')
         sub_key2 = types.InlineKeyboardButton(text='Конкурсы', callback_data='contests_phisics')
         sub_key3 = types.InlineKeyboardButton(text='Профильные лагеря', callback_data='camp_phisics')
+        back_key = types.InlineKeyboardButton(text='Вернуться назад', callback_data='starter')
         
         keyboard.add(sub_key1)
         keyboard.add(sub_key2)
         keyboard.add(sub_key3)
+        keyboard.add(back_key)
         
         bot.send_message(call.message.chat.id, "Выбрано направление Физика", reply_markup=keyboard)
     elif call.data == "informatics":
@@ -50,10 +57,12 @@ def callback_worker(call):
         sub_key1 = types.InlineKeyboardButton(text='Олимпиады', callback_data='olympiads_informatics')
         sub_key2 = types.InlineKeyboardButton(text='Конкурсы', callback_data='contests_informatics')
         sub_key3 = types.InlineKeyboardButton(text='Профильные лагеря', callback_data='camp_informatics')
+        back_key = types.InlineKeyboardButton(text='Вернуться назад', callback_data='starter')
         
         keyboard.add(sub_key1)
         keyboard.add(sub_key2)
         keyboard.add(sub_key3)
+        keyboard.add(back_key)
         
         bot.send_message(call.message.chat.id, "Выбрано направление Информатика", reply_markup=keyboard)
     elif call.data == "mathematics":
@@ -61,10 +70,12 @@ def callback_worker(call):
         sub_key1 = types.InlineKeyboardButton(text='Олимпиады', callback_data='olympiads_mathematics')
         sub_key2 = types.InlineKeyboardButton(text='Конкурсы', callback_data='contests_mathematics')
         sub_key3 = types.InlineKeyboardButton(text='Профильные лагеря', callback_data='camp_mathematics')
+        back_key = types.InlineKeyboardButton(text='Вернуться назад', callback_data='starter')
         
         keyboard.add(sub_key1)
         keyboard.add(sub_key2)
         keyboard.add(sub_key3)
+        keyboard.add(back_key)
         
         bot.send_message(call.message.chat.id, "Выбрано направление математика", reply_markup=keyboard)
     elif call.data == "biology":
@@ -72,10 +83,12 @@ def callback_worker(call):
         sub_key1 = types.InlineKeyboardButton(text='Олимпиады', callback_data='olympiads_biology')
         sub_key2 = types.InlineKeyboardButton(text='Конкурсы', callback_data='contests_biology')
         sub_key3 = types.InlineKeyboardButton(text='Профильные лагеря', callback_data='camp_biology')
+        back_key = types.InlineKeyboardButton(text='Вернуться назад', callback_data='starter')
         
         keyboard.add(sub_key1)
         keyboard.add(sub_key2)
         keyboard.add(sub_key3)
+        keyboard.add(back_key)
         
         bot.send_message(call.message.chat.id, "Выбрано направление биология, химия", reply_markup=keyboard)
     elif call.data == "english":
@@ -83,10 +96,12 @@ def callback_worker(call):
         sub_key1 = types.InlineKeyboardButton(text='Олимпиады', callback_data='olympiads_english')
         sub_key2 = types.InlineKeyboardButton(text='Конкурсы', callback_data='contests_english')
         sub_key3 = types.InlineKeyboardButton(text='Профильные лагеря', callback_data='camp_english')
+        back_key = types.InlineKeyboardButton(text='Вернуться назад', callback_data='starter')
         
         keyboard.add(sub_key1)
         keyboard.add(sub_key2)
         keyboard.add(sub_key3)
+        keyboard.add(back_key)
         
         bot.send_message(call.message.chat.id, "Выбрано направление английский язык", reply_markup=keyboard)
     elif call.data == "russian":
@@ -94,10 +109,12 @@ def callback_worker(call):
         sub_key1 = types.InlineKeyboardButton(text='Олимпиады', callback_data='olympiads_russian')
         sub_key2 = types.InlineKeyboardButton(text='Конкурсы', callback_data='contests_russian')
         sub_key3 = types.InlineKeyboardButton(text='Профильные лагеря', callback_data='camp_russian')
+        back_key = types.InlineKeyboardButton(text='Вернуться назад', callback_data='starter')
         
         keyboard.add(sub_key1)
         keyboard.add(sub_key2)
         keyboard.add(sub_key3)
+        keyboard.add(back_key)
         
         bot.send_message(call.message.chat.id, "Выбрано направление русский язык, литература", reply_markup=keyboard)
     elif call.data == "history":
@@ -105,10 +122,12 @@ def callback_worker(call):
         sub_key1 = types.InlineKeyboardButton(text='Олимпиады', callback_data='olympiads_history')
         sub_key2 = types.InlineKeyboardButton(text='Конкурсы', callback_data='contests_history')
         sub_key3 = types.InlineKeyboardButton(text='Профильные лагеря', callback_data='camp_history')
+        back_key = types.InlineKeyboardButton(text='Вернуться назад', callback_data='starter')
         
         keyboard.add(sub_key1)
         keyboard.add(sub_key2)
         keyboard.add(sub_key3)
+        keyboard.add(back_key)
         
         bot.send_message(call.message.chat.id, "Выбрано направление история, обществознание, право", reply_markup=keyboard)
     elif call.data == "art":
@@ -116,10 +135,12 @@ def callback_worker(call):
         sub_key1 = types.InlineKeyboardButton(text='Олимпиады', callback_data='olympiads_art')
         sub_key2 = types.InlineKeyboardButton(text='Конкурсы', callback_data='contests_art')
         sub_key3 = types.InlineKeyboardButton(text='Профильные лагеря', callback_data='camp_art')
+        back_key = types.InlineKeyboardButton(text='Вернуться назад', callback_data='starter')
         
         keyboard.add(sub_key1)
         keyboard.add(sub_key2)
         keyboard.add(sub_key3)
+        keyboard.add(back_key)
         
         bot.send_message(call.message.chat.id, "Выбрано направление художественное творчество", reply_markup=keyboard)
     elif call.data == "olympiads_phisics":
